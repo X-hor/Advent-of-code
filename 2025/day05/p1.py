@@ -1,16 +1,10 @@
-lines = open("input.txt").read().splitlines()
-
-blank_line_index = lines.index("")
-ranges = lines[:blank_line_index]
-ids = lines[blank_line_index+1:]
-
+ranges = [list(map(int, line.split("-"))) for line in open('input.txt').read().split("\n\n")[0].splitlines()]
+ids = [int(id) for id in open("input.txt").read().split("\n\n")[1].splitlines()]
 count = 0
 for id in ids:
-    id = int(id)
     for r in ranges:
-        start, end = map(int, r.split("-"))
-        if id in range(start, end + 1) :
+        start, end = r
+        if start <= id <= end :
             count += 1
             break
-
-print("fresh ingredient : ", count)
+print(count)

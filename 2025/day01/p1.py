@@ -1,20 +1,6 @@
-import re
-rotations = open ("input.txt").read().splitlines()
-p = 50
-count = 0
-for rotation in rotations :
-    match = re.match(r"^([A-Z])(\d+)$", rotation)
-    direction = match[1]
-    distance = int(match[2])
-
-    if direction == "R" :
-        p += distance
-    else :
-        p -= distance 
-    
-    p = p % 100
-
-    if p == 0 :
-        count += 1
-
+p, count = 50, 0
+for line in open("input.txt"):
+    direction, distance = line[0], int(line[1:])
+    p = (p + (distance if direction == "R" else -distance)) % 100
+    count += (p == 0)
 print(count)
